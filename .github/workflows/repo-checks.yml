@@ -1,0 +1,53 @@
+name: Repo Checks
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Validate presence
+        run: |
+          test -f journal/DeveloperJournal.md
+          test -f tasks/ProjectTasks.md
+          test -f docs/ProjectInformation.md
+      - name: Validate tasks format
+        run: |
+          python - << 'PY'
+import re, sys
+txt=open('tasks/ProjectTasks.md').read()
+blocks=re.findall(r"- TASK:\s*(.+?)\n\s*owner:\s*(.+?)\n\s*status:\s*(.+?)\n\s*notes:\s*(.*?)(?:\n\n|$)", txt, flags=re.S)
+if not blocks: 
+    print("No task blocks found"); sys.exit(1)
+valid = {'TODO','IN_PROGRESS','REVIEW','DONE','BLOCKED','NEEDS_INFO'}
+for t in blocks:
+    title, owner, status, notes = [x.strip() for x in t]
+    if not title:
+        print("Empty task title"); sys.exit(2)
+    if status not in valid:
+        print(f"Invalid status for task '{title}': {status}"); sys.exit(3)
+print("Tasks OK")
+PY
+      - name: Validate mandatory notices acknowledged
+        run: |
+          python - << 'PY'
+import re, sys
+txt=open('docs/ProjectInformation.md').read()
+notices=re.findall(r"- (NOTICE-\d{4}-\d{2}-\d{2}):\s*\".*?\"\n\s*- Effective: .*?\n\s*- Mandatory: (Yes|No)\n\s*- Action Required.*?\n\s*- Acknowledged by:\n(.*?)(?:\n\n|$)", txt, flags=re.S)
+ok=True
+for nid, mandatory, ack_block in notices:
+    if mandatory=='Yes':
+        acks=[l.strip() for l in ack_block.strip().splitlines() if l.strip().startswith('-') or l.strip().startswith('*') or l.strip().startswith(' -') or l.strip().startswith('  -')]
+        if not acks:
+            print(f"Mandatory notice {nid} has no acknowledgments"); ok=False
+if not ok:
+    sys.exit(4)
+print("Notices OK")
+PY

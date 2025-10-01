@@ -1,0 +1,7 @@
+project:
+  name: Neon Notes
+  owner: Brittan
+  repo_policy:
+    default_branch: main
+    protected_branches: [main, release/*]
+  statuses: [TODO, IN_PROGRESS, REVIEW, DONE, BLOCKED, NEEDS_INFO]
