@@ -8,3 +8,4 @@ Minimal anteckningsapp med 1-klicks AI-sammanfattning (mock i MVP).
 
 ## Repo-karta
 `docs/`, `tasks/`, `journal/`, `scripts/`, `tools/`, `configs/`, `.github/workflows/`
+

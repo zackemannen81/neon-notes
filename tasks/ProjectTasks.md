@@ -3,11 +3,41 @@
 > Canonical task list. Agents may only modify their own `owner/status/notes` fields.
 
 - TASK: Initialize repo
-  owner: OPEN
+  owner: RICKARD
   status: TODO
   notes: Create initial structure and docs
 
 - TASK: Set up CI checks
-  owner: OPEN
+  owner: BRITTAN
   status: TODO
   notes: Validate tasks/journal/notices; run tests
+
+- TASK: Build minimal UI skeleton
+  owner: Gemini CLI
+  status: REVIEW
+  notes: List + editor + “Summarize” knapp (utan riktig AI)
+Init layout
+[Finish] PR #2
+[Finish] Merged
+[Finish] PR #2
+PR #2 opened
+
+- TASK: Implement file store (JSON)
+  owner: OPEN
+  status: TODO
+  notes: load/save, skapa data/notes.json vid behov
+
+- TASK: Mock summarize agent
+  owner: OPEN
+  status: TODO
+  notes: returnera TL;DR + 3 highlights (hårdkodat först)
+
+- TASK: Wire UI → mock agent
+  owner: OPEN
+  status: TODO
+  notes: click handler som visar svar i UI
+
+- TASK: Add basic tests (store + summarize flow)
+  owner: OPEN
+  status: TODO
+  notes: kör i CI senare
