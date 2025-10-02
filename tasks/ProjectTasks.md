@@ -88,9 +88,10 @@ Auto-picked
   notes: Exportera note->.md; Importera .md->note
 
 - TASK: CI — workflow_dispatch + badge
-  owner: OPEN
-  status: TODO
+  owner: Gemini CLI
+  status: REVIEW
   notes: Lägg manuell Run-knapp + README-badge för Repo Checks
+Auto-picked
 
 - TASK: Docs — user guide & screenshots
   owner: OPEN

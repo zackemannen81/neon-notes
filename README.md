@@ -1,5 +1,7 @@
 # Neon Notes
 
+![Repo Checks](https://github.com/zackemannen81/neon-notes/actions/workflows/repo-checks.yml/badge.svg)
+
 Minimal anteckningsapp med 1-klicks AI-sammanfattning (mock i MVP).
 
 - Läs **[Quickstart](docs/QUICKSTART.md)** för att komma igång

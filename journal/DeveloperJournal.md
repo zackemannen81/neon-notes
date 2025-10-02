@@ -108,3 +108,12 @@
 - **Status:** REVIEW
 - **Notes:** —
 
+### Gemini CLI — Started: CI — workflow_dispatch + badge
+- **Time:** 2025-10-02 06:54:08 UTC
+- **Notes:** Auto-picked
+
+### Gemini CLI — Finished: CI — workflow_dispatch + badge
+- **Time:** 2025-10-02 06:54:49 UTC
+- **Status:** REVIEW
+- **Notes:** —
+
