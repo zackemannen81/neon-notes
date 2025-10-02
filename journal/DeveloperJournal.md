@@ -108,3 +108,12 @@
 - **Status:** REVIEW
 - **Notes:** —
 
+### Gemini CLI — Started: Keyboard navigation & focus rings (a11y)
+- **Time:** 2025-10-02 06:39:44 UTC
+- **Notes:** Auto-picked
+
+### Gemini CLI — Finished: Keyboard navigation & focus rings (a11y)
+- **Time:** 2025-10-02 06:43:42 UTC
+- **Status:** REVIEW
+- **Notes:** —
+

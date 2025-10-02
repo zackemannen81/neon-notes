@@ -13,6 +13,7 @@
         #notes-list li { padding: 5px 0; cursor: pointer; }
         #notes-list li:hover { background-color: #f0f0f0; }
         .button-group { display: flex; justify-content: space-between; }
+        :focus { outline: 2px solid #007bff; outline-offset: 2px; } /* Clear focus style */
     </style>
 </head>
 <body>
@@ -74,7 +75,10 @@
             notes.forEach(note => {
                 const li = document.createElement('li');
                 li.textContent = note.title || 'Untitled Note';
-                li.dataset.id = note.id;
+                li.style.padding = '5px 0';
+                li.setAttribute('tabindex', '0'); // Make list items focusable
+
+                const titleSpan = document.createElement('span');
                 li.addEventListener('click', () => {
                     currentNoteId = note.id;
                     editor.value = note.content;
@@ -120,6 +124,27 @@
 
         // Initial load
         loadNotes();
+
+        notesList.addEventListener('keydown', (e) => {
+            const focusedItem = document.activeElement;
+            if (focusedItem && focusedItem.parentNode === notesList && (e.key === 'ArrowUp' || e.key === 'ArrowDown')) {
+                e.preventDefault();
+                const items = Array.from(notesList.children);
+                const currentIndex = items.indexOf(focusedItem);
+                let nextIndex = -1;
+
+                if (e.key === 'ArrowUp') {
+                    nextIndex = (currentIndex > 0) ? currentIndex - 1 : items.length - 1;
+                } else if (e.key === 'ArrowDown') {
+                    nextIndex = (currentIndex < items.length - 1) ? currentIndex + 1 : 0;
+                }
+
+                if (nextIndex !== -1) {
+                    items[nextIndex].focus();
+                    items[nextIndex].click(); // Simulate click to load note
+                }
+            }
+        });
     </script>
 </body>
 </html>

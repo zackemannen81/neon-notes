@@ -58,9 +58,10 @@ Auto-picked
   notes: Autosave var 3s; diskret indikator i header
 
 - TASK: Keyboard navigation & focus rings (a11y)
-  owner: OPEN
-  status: TODO
+  owner: Gemini CLI
+  status: REVIEW
   notes: Piltangenter i listan; tabb-ordning; tydlig focus-stil
+Auto-picked
 
 - TASK: Empty states & error states
   owner: OPEN
