@@ -89,17 +89,23 @@
 
             if (currentNoteId) {
                 // Update existing note
+                const now = new Date().toISOString();
                 const noteIndex = notes.findIndex(n => n.id === currentNoteId);
                 if (noteIndex > -1) {
                     notes[noteIndex].content = content;
                     notes[noteIndex].title = content.split('\n')[0].substring(0, 50); // Simple title from first line
+                    notes[noteIndex].updatedAt = now;
                 }
             } else {
                 // Create new note
+                const now = new Date().toISOString();
                 const newNote = {
-                    id: Date.now().toString(),
+                    id: Date.now().toString(), // Simple ID for now, ideally UUID
                     title: content.split('\n')[0].substring(0, 50), // Simple title from first line
-                    content: content
+                    content: content,
+                    createdAt: now,
+                    updatedAt: now,
+                    summary: { tldr: '', highlights: [] } // Placeholder for summary
                 };
                 notes.push(newNote);
                 currentNoteId = newNote.id;

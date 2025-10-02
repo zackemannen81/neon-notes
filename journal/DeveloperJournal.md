@@ -108,3 +108,12 @@
 - **Status:** REVIEW
 - **Notes:** —
 
+### Gemini CLI — Started: Migrate storage — localStorage → JSON filstore
+- **Time:** 2025-10-02 06:50:17 UTC
+- **Notes:** Auto-picked
+
+### Gemini CLI — Finished: Migrate storage — localStorage → JSON filstore
+- **Time:** 2025-10-02 06:50:51 UTC
+- **Status:** REVIEW
+- **Notes:** —
+

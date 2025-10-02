@@ -78,9 +78,10 @@ Auto-picked
   notes: Testa TL;DR truncation och 3 highlights ur text
 
 - TASK: Migrate storage — localStorage → JSON filstore
-  owner: OPEN
-  status: TODO
+  owner: Gemini CLI
+  status: REVIEW
   notes: Bevara schema; skriv migreringssteg
+Auto-picked
 
 - TASK: Import/Export Markdown
   owner: OPEN
