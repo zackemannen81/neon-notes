@@ -33,7 +33,9 @@
         </div>
     </div>
 
-    <script>
+    <script type="module">
+        import { summarizeNote } from './summarizer.js';
+
         const editor = document.getElementById('editor');
         const notesList = document.getElementById('notes-list');
         const saveButton = document.getElementById('save-button');
@@ -110,12 +112,12 @@
 
         summarizeButton.addEventListener('click', () => {
             const noteContent = editor.value;
-            if (noteContent.trim() === '') {
-                summaryOutput.textContent = 'Nothing to summarize.';
-                return;
+            const summary = summarizeNote(noteContent);
+            if (summary.tldr === 'Nothing to summarize.') {
+                summaryOutput.textContent = summary.tldr;
+            } else {
+                summaryOutput.innerHTML = `<b>TL;DR:</b> ${summary.tldr}<br><b>Highlights:</b><ul>${summary.highlights.map(h => `<li>${h}</li>`).join('')}</ul>`;
             }
-            const mockSummary = `TL;DR: This is a mock summary of your note. Highlights: 1. Key point one. 2. Key point two. 3. Key point three.`;
-            summaryOutput.textContent = mockSummary;
         });
 
         // Initial load

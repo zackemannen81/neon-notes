@@ -73,9 +73,10 @@ Auto-picked
   notes: Kör lokalt + i CI
 
 - TASK: Unit tests — summarizer mock
-  owner: OPEN
-  status: TODO
+  owner: Gemini CLI
+  status: REVIEW
   notes: Testa TL;DR truncation och 3 highlights ur text
+Auto-picked
 
 - TASK: Migrate storage — localStorage → JSON filstore
   owner: OPEN
