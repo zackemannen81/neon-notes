@@ -108,3 +108,12 @@
 - **Status:** REVIEW
 - **Notes:** —
 
+### Gemini CLI — Started: Docs — user guide & screenshots
+- **Time:** 2025-10-02 06:55:45 UTC
+- **Notes:** Auto-picked
+
+### Gemini CLI — Finished: Docs — user guide & screenshots
+- **Time:** 2025-10-02 06:56:34 UTC
+- **Status:** REVIEW
+- **Notes:** —
+

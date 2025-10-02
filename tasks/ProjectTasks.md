@@ -93,6 +93,7 @@ Auto-picked
   notes: Lägg manuell Run-knapp + README-badge för Repo Checks
 
 - TASK: Docs — user guide & screenshots
-  owner: OPEN
-  status: TODO
+  owner: Gemini CLI
+  status: REVIEW
   notes: Kort användarguide; placeholder för screenshots
+Auto-picked
