@@ -103,3 +103,8 @@
 - **Status:** DONE
 - **Notes:** Bulk close by Gemini CLI
 
+### Gemini CLI — Finished: Wire UI → mock agent
+- **Time:** 2025-10-02 06:35:02 UTC
+- **Status:** REVIEW
+- **Notes:** —
+

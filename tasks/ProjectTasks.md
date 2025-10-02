@@ -38,7 +38,7 @@ Returnera TL;DR + 3 highlights (mock)
 
 - TASK: Wire UI → mock agent
   owner: Gemini CLI
-  status: IN_PROGRESS
+  status: REVIEW
   notes: click handler som visar svar i UI
 Auto-picked
 
@@ -47,7 +47,7 @@ Auto-picked
   status: TODO
   notes: kör i CI senare
 
-  - TASK: Delete & Rename notes
+- TASK: Delete & Rename notes
   owner: OPEN
   status: TODO
   notes: Delete action + inline rename på title
@@ -96,4 +96,3 @@ Auto-picked
   owner: OPEN
   status: TODO
   notes: Kort användarguide; placeholder för screenshots
-
