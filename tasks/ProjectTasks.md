@@ -13,7 +13,7 @@
   notes: Validate tasks/journal/notices; run tests
 
 - TASK: Build minimal UI skeleton
-  owner: Gemini
+  owner: Gemini CLI
   status: IN_PROGRESS
   notes: List + editor + “Summarize” knapp (utan riktig AI)
 Init layout
