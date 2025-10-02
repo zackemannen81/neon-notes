@@ -63,9 +63,10 @@ Auto-picked
   notes: Piltangenter i listan; tabb-ordning; tydlig focus-stil
 
 - TASK: Empty states & error states
-  owner: OPEN
-  status: TODO
+  owner: Gemini CLI
+  status: REVIEW
   notes: Visa vänliga tomt-meddelanden; fel-fallback i UI
+Auto-picked
 
 - TASK: Lint/Format setup (ESLint + Prettier)
   owner: OPEN

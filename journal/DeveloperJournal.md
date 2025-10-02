@@ -108,3 +108,12 @@
 - **Status:** REVIEW
 - **Notes:** —
 
+### Gemini CLI — Started: Empty states & error states
+- **Time:** 2025-10-02 06:44:24 UTC
+- **Notes:** Auto-picked
+
+### Gemini CLI — Finished: Empty states & error states
+- **Time:** 2025-10-02 06:45:51 UTC
+- **Status:** REVIEW
+- **Notes:** —
+
