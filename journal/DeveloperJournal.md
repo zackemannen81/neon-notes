@@ -108,3 +108,12 @@
 - **Status:** REVIEW
 - **Notes:** —
 
+### Gemini CLI — Started: Lint/Format setup (ESLint + Prettier)
+- **Time:** 2025-10-02 06:46:35 UTC
+- **Notes:** Auto-picked
+
+### Gemini CLI — Finished: Lint/Format setup (ESLint + Prettier)
+- **Time:** 2025-10-02 06:47:33 UTC
+- **Status:** REVIEW
+- **Notes:** —
+

@@ -1,0 +1,31 @@
+{
+  "name": "neon-notes",
+  "version": "1.0.0",
+  "description": "Minimal anteckningsapp med 1-klicks AI-sammanfattning (mock i MVP).",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zackemannen81/neon-notes.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zackemannen81/neon-notes/issues"
+  },
+  "homepage": "https://github.com/zackemannen81/neon-notes#readme",
+  "devDependencies": {
+    "eslint": "^9.36.0",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.6.2"
+  }
+}

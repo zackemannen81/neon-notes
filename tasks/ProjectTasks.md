@@ -68,9 +68,10 @@ Auto-picked
   notes: Visa vänliga tomt-meddelanden; fel-fallback i UI
 
 - TASK: Lint/Format setup (ESLint + Prettier)
-  owner: OPEN
-  status: TODO
+  owner: Gemini CLI
+  status: REVIEW
   notes: Kör lokalt + i CI
+Auto-picked
 
 - TASK: Unit tests — summarizer mock
   owner: OPEN
