@@ -48,9 +48,10 @@ Auto-picked
   notes: kör i CI senare
 
 - TASK: Delete & Rename notes
-  owner: OPEN
-  status: TODO
+  owner: Gemini CLI
+  status: REVIEW
   notes: Delete action + inline rename på title
+Auto-picked
 
 - TASK: Autosave & Save indicator
   owner: OPEN
