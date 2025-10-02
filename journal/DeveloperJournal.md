@@ -108,3 +108,12 @@
 - **Status:** REVIEW
 - **Notes:** —
 
+### Gemini CLI — Started: Add basic tests (store + summarize flow)
+- **Time:** 2025-10-02 06:35:38 UTC
+- **Notes:** Auto-picked
+
+### Gemini CLI — Finished: Add basic tests (store + summarize flow)
+- **Time:** 2025-10-02 06:36:15 UTC
+- **Status:** REVIEW
+- **Notes:** —
+

@@ -43,9 +43,10 @@ Returnera TL;DR + 3 highlights (mock)
 Auto-picked
 
 - TASK: Add basic tests (store + summarize flow)
-  owner: OPEN
-  status: TODO
+  owner: Gemini CLI
+  status: REVIEW
   notes: kör i CI senare
+Auto-picked
 
 - TASK: Delete & Rename notes
   owner: OPEN
