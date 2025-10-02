@@ -26,6 +26,7 @@
         <textarea id="editor" placeholder="Start writing your note..."></textarea>
         <div class="button-group">
             <button id="save-button">Save Note</button>
+            <span id="save-indicator" style="margin-left: 10px; font-size: 0.9em; color: #555;"></span>
             <button id="summarize-button">Summarize (Mock)</button>
         </div>
         <div id="summary-output" style="margin-top: 10px; padding: 10px; border: 1px solid #eee; background-color: #f9f9f9;">
@@ -39,9 +40,11 @@
         const saveButton = document.getElementById('save-button');
         const summarizeButton = document.getElementById('summarize-button');
         const summaryOutput = document.getElementById('summary-output');
+        const saveIndicator = document.getElementById('save-indicator');
 
         let currentNoteId = null;
         let notes = []; // In-memory storage for now
+        let autosaveTimeout;
 
         // Mock function to load notes
         async function loadNotes() {
@@ -61,20 +64,94 @@
 
         // Mock function to save notes
         async function saveNotes() {
-            // In a real app, this would send data to a backend
-            // For now, we'll just log it and simulate saving
-            console.log('Saving notes:', notes);
-            // Simulate writing to data/notes.json (this won't actually write to disk from the browser)
-            // This part would be handled by a server-side component
-            alert('Note saved (mock)!');
+            saveIndicator.textContent = 'Saving...';
+            console.log('Attempting to save notes:', notes);
+            try {
+                // Simulate sending data to a backend endpoint
+                const response = await fetch('/save-notes', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(notes),
+                });
+
+                if (response.ok) {
+                    console.log('Notes saved (mock) successfully!');
+                    saveIndicator.textContent = 'Saved';
+                    setTimeout(() => saveIndicator.textContent = '', 2000); // Clear after 2 seconds
+                } else {
+                    console.error('Failed to save notes (mock):', response.statusText);
+                    saveIndicator.textContent = 'Save Failed!';
+                }
+            } catch (error) {
+                console.error('Error during mock save:', error);
+                saveIndicator.textContent = 'Save Error!';
+            }
         }
 
         function renderNotesList() {
             notesList.innerHTML = '';
             notes.forEach(note => {
                 const li = document.createElement('li');
-                li.textContent = note.title || 'Untitled Note';
-                li.dataset.id = note.id;
+                li.style.display = 'flex';
+                li.style.alignItems = 'center';
+                li.style.padding = '5px 0';
+
+                const titleSpan = document.createElement('span');
+                titleSpan.textContent = note.title || 'Untitled Note';
+                titleSpan.style.cursor = 'pointer';
+                titleSpan.style.flexGrow = '1';
+                titleSpan.addEventListener('click', (event) => {
+                    event.stopPropagation(); // Prevent li click event
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.value = titleSpan.textContent;
+                    input.style.width = 'calc(100% - 30px)'; // Adjust for button
+                    input.style.boxSizing = 'border-box';
+
+                    const saveTitle = () => {
+                        note.title = input.value;
+                        saveNotes();
+                        renderNotesList();
+                    };
+
+                    input.addEventListener('blur', saveTitle);
+                    input.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter') {
+                            input.blur(); // Trigger blur to save
+                        }
+                    });
+
+                    li.replaceChild(input, titleSpan);
+                    input.focus();
+                });
+                li.appendChild(titleSpan);
+
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'X';
+                deleteButton.style.marginLeft = '10px';
+                deleteButton.style.backgroundColor = '#f44336';
+                deleteButton.style.color = 'white';
+                deleteButton.style.border = 'none';
+                deleteButton.style.borderRadius = '3px';
+                deleteButton.style.cursor = 'pointer';
+                deleteButton.style.padding = '2px 6px';
+                deleteButton.addEventListener('click', (event) => {
+                    event.stopPropagation(); // Prevent li click event
+                    if (confirm('Are you sure you want to delete this note?')) {
+                        notes = notes.filter(n => n.id !== note.id);
+                        saveNotes();
+                        renderNotesList();
+                        if (currentNoteId === note.id) {
+                            editor.value = '';
+                            currentNoteId = null;
+                        }
+                    }
+                });
+
+                li.appendChild(deleteButton);
+
                 li.addEventListener('click', () => {
                     currentNoteId = note.id;
                     editor.value = note.content;
@@ -106,6 +183,16 @@
             }
             saveNotes();
             renderNotesList();
+        });
+
+        editor.addEventListener('input', () => {
+            clearTimeout(autosaveTimeout);
+            autosaveTimeout = setTimeout(() => {
+                // Only autosave if there's a current note selected or content to create a new one
+                if (currentNoteId || editor.value.trim() !== '') {
+                    saveButton.click(); // Trigger the save logic
+                }
+            }, 3000); // Autosave every 3 seconds
         });
 
         summarizeButton.addEventListener('click', () => {

@@ -53,9 +53,10 @@ Auto-picked
   notes: Delete action + inline rename på title
 
 - TASK: Autosave & Save indicator
-  owner: OPEN
-  status: TODO
+  owner: Gemini CLI
+  status: REVIEW
   notes: Autosave var 3s; diskret indikator i header
+Auto-picked
 
 - TASK: Keyboard navigation & focus rings (a11y)
   owner: OPEN
