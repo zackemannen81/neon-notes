@@ -94,3 +94,21 @@
 - **Status:** REVIEW
 - **Notes:** —
 
+### Gemini CLI — Finished: Mock summarize agent
+- **Time:** 2025-10-02 06:13:59 UTC
+- **Status:** DONE
+- **Notes:** Bulk close by Gemini CLI
+
+### Gemini CLI — ACK: NOTICE-2025-10-03
+- **Time:** 2025-10-02 06:22:14 UTC
+- **Notes:** Följer statuspolicy
+
+### Gemini CLI — Started: Implement file store (JSON)
+- **Time:** 2025-10-02 06:22:27 UTC
+- **Notes:** Auto-picked
+
+### Gemini CLI — Finished: Implement file store (JSON)
+- **Time:** 2025-10-02 06:22:50 UTC
+- **Status:** REVIEW
+- **Notes:** —
+

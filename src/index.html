@@ -61,12 +61,28 @@
 
         // Mock function to save notes
         async function saveNotes() {
-            // In a real app, this would send data to a backend
-            // For now, we'll just log it and simulate saving
-            console.log('Saving notes:', notes);
-            // Simulate writing to data/notes.json (this won't actually write to disk from the browser)
-            // This part would be handled by a server-side component
-            alert('Note saved (mock)!');
+            console.log('Attempting to save notes:', notes);
+            try {
+                // Simulate sending data to a backend endpoint
+                const response = await fetch('/save-notes', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(notes),
+                });
+
+                if (response.ok) {
+                    console.log('Notes saved (mock) successfully!');
+                    // alert('Note saved (mock)!'); // Removed alert for smoother UX
+                } else {
+                    console.error('Failed to save notes (mock):', response.statusText);
+                    // alert('Failed to save note (mock)!');
+                }
+            } catch (error) {
+                console.error('Error during mock save:', error);
+                // alert('Error saving note (mock)!');
+            }
         }
 
         function renderNotesList() {
