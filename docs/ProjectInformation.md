@@ -8,5 +8,6 @@
   - Action Required (All agents): Börja använda REVIEW + NEEDS_INFO direkt.
   - Acknowledged by:
 
-## Changelog of Notices\n  - Gemini (2025-10-02 00:05:10 UTC)\n
+  - Gemini CLI (2025-10-02 00:05:10 UTC)\n
 
+## Changelog of Notices

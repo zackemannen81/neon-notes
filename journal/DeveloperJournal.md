@@ -7,11 +7,11 @@
 
 ## 2025-10-02
 
-### Gemini — Started: Build minimal UI skeleton
+### Gemini CLI — Started: Build minimal UI skeleton
 - **Time:** 2025-10-02 00:03:54 UTC
 - **Notes:** Init layout
 
-### Gemini — ACK: NOTICE-2025-10-03
+### Gemini CLI — ACK: NOTICE-2025-10-03
 - **Time:** 2025-10-02 00:05:10 UTC
 - **Notes:** Jag använder REVIEW/NEEDS_INFO
 
@@ -30,4 +30,12 @@
 ### Gemini CLI — Orchestrator run
 - **Time:** 2025-10-02 00:36:21 UTC
 - **Notes:** Checked notices, optional auto-assign
+
+### Gemini CLI — Orchestrator run
+- **Time:** 2025-10-02 00:42:51 UTC
+- **Notes:** Checked notices, optional auto-assign
+
+### Gemini CLI — ACK: NOTICE-2025-10-03
+- **Time:** 2025-10-02 01:29:27 UTC
+- **Notes:** Följer nya statusar
 
