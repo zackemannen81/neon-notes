@@ -13,14 +13,16 @@
   notes: Validate tasks/journal/notices; run tests
 
 - TASK: Build minimal UI skeleton
-  owner: Gemini CLI
-  status: REVIEW
+  owner: OPEN
+  status: DONE
   notes: List + editor + “Summarize” knapp (utan riktig AI)
 Init layout
 [Finish] PR #2
 [Finish] Merged
 [Finish] PR #2
 PR #2 opened
+[Finish] Merged
+[Finish] Merged PR #2
 
 - TASK: Implement file store (JSON)
   owner: OPEN
@@ -28,9 +30,10 @@ PR #2 opened
   notes: load/save, skapa data/notes.json vid behov
 
 - TASK: Mock summarize agent
-  owner: OPEN
-  status: TODO
+  owner: Gemini CLI
+  status: REVIEW
   notes: returnera TL;DR + 3 highlights (hårdkodat först)
+Returnera TL;DR + 3 highlights (mock)
 
 - TASK: Wire UI → mock agent
   owner: OPEN

@@ -75,3 +75,22 @@
 - **Time:** 2025-10-02 02:20:17 UTC
 - **Update:** PR #2 opened
 
+### Gemini CLI — Finished: Build minimal UI skeleton
+- **Time:** 2025-10-02 02:30:19 UTC
+- **Status:** DONE
+- **Notes:** Merged
+
+### Gemini CLI — Finished: Build minimal UI skeleton
+- **Time:** 2025-10-02 02:34:31 UTC
+- **Status:** DONE
+- **Notes:** Merged PR #2
+
+### Gemini CLI — Started: Mock summarize agent
+- **Time:** 2025-10-02 02:35:34 UTC
+- **Notes:** Returnera TL;DR + 3 highlights (mock)
+
+### Gemini CLI — Finished: Mock summarize agent
+- **Time:** 2025-10-02 02:36:09 UTC
+- **Status:** REVIEW
+- **Notes:** —
+
