@@ -13,14 +13,15 @@
   notes: Validate tasks/journal/notices; run tests
 
 - TASK: Build minimal UI skeleton
-  owner: Gemini CLI
-  status: REVIEW
+  owner: OPEN
+  status: DONE
   notes: List + editor + “Summarize” knapp (utan riktig AI)
 Init layout
 [Finish] PR #2
 [Finish] Merged
 [Finish] PR #2
 PR #2 opened
+[Finish] Merged
 
 - TASK: Implement file store (JSON)
   owner: OPEN
