@@ -94,3 +94,12 @@
 - **Status:** REVIEW
 - **Notes:** —
 
+### Gemini CLI — Started: Wire UI → mock agent
+- **Time:** 2025-10-02 06:23:36 UTC
+- **Notes:** Auto-picked
+
+### Gemini CLI — Finished: Mock summarize agent
+- **Time:** 2025-10-02 06:33:02 UTC
+- **Status:** DONE
+- **Notes:** Bulk close by Gemini CLI
+
