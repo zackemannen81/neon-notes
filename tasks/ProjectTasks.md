@@ -31,7 +31,7 @@ PR #2 opened
 
 - TASK: Mock summarize agent
   owner: Gemini CLI
-  status: IN_PROGRESS
+  status: REVIEW
   notes: returnera TL;DR + 3 highlights (hårdkodat först)
 Returnera TL;DR + 3 highlights (mock)
 
