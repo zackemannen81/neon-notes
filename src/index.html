@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Notes</title>
+    <style>
+        body { font-family: sans-serif; display: flex; height: 100vh; margin: 0; }
+        #sidebar { width: 30%; border-right: 1px solid #ccc; padding: 10px; overflow-y: auto; }
+        #main-content { flex-grow: 1; display: flex; flex-direction: column; padding: 10px; }
+        #editor { flex-grow: 1; border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; }
+        #notes-list { list-style: none; padding: 0; }
+        #notes-list li { padding: 5px 0; cursor: pointer; }
+        #notes-list li:hover { background-color: #f0f0f0; }
+        .button-group { display: flex; justify-content: space-between; }
+    </style>
+</head>
+<body>
+    <div id="sidebar">
+        <h2>Notes</h2>
+        <ul id="notes-list">
+            <!-- Notes will be loaded here -->
+        </ul>
+    </div>
+    <div id="main-content">
+        <textarea id="editor" placeholder="Start writing your note..."></textarea>
+        <div class="button-group">
+            <button id="save-button">Save Note</button>
+            <button id="summarize-button">Summarize (Mock)</button>
+        </div>
+    </div>
+
+    <script>
+        const editor = document.getElementById('editor');
+        const notesList = document.getElementById('notes-list');
+        const saveButton = document.getElementById('save-button');
+        const summarizeButton = document.getElementById('summarize-button');
+
+        let currentNoteId = null;
+        let notes = []; // In-memory storage for now
+
+        // Mock function to load notes
+        async function loadNotes() {
+            try {
+                const response = await fetch('data/notes.json');
+                if (response.ok) {
+                    notes = await response.json();
+                } else {
+                    notes = [];
+                }
+            } catch (error) {
+                console.error('Error loading notes:', error);
+                notes = [];
+            }
+            renderNotesList();
+        }
+
+        // Mock function to save notes
+        async function saveNotes() {
+            // In a real app, this would send data to a backend
+            // For now, we'll just log it and simulate saving
+            console.log('Saving notes:', notes);
+            // Simulate writing to data/notes.json (this won't actually write to disk from the browser)
+            // This part would be handled by a server-side component
+            alert('Note saved (mock)!');
+        }
+
+        function renderNotesList() {
+            notesList.innerHTML = '';
+            notes.forEach(note => {
+                const li = document.createElement('li');
+                li.textContent = note.title || 'Untitled Note';
+                li.dataset.id = note.id;
+                li.addEventListener('click', () => {
+                    currentNoteId = note.id;
+                    editor.value = note.content;
+                });
+                notesList.appendChild(li);
+            });
+        }
+
+        saveButton.addEventListener('click', () => {
+            const content = editor.value;
+            if (content.trim() === '') return;
+
+            if (currentNoteId) {
+                // Update existing note
+                const noteIndex = notes.findIndex(n => n.id === currentNoteId);
+                if (noteIndex > -1) {
+                    notes[noteIndex].content = content;
+                    notes[noteIndex].title = content.split('\n')[0].substring(0, 50); // Simple title from first line
+                }
+            } else {
+                // Create new note
+                const newNote = {
+                    id: Date.now().toString(),
+                    title: content.split('\n')[0].substring(0, 50), // Simple title from first line
+                    content: content
+                };
+                notes.push(newNote);
+                currentNoteId = newNote.id;
+            }
+            saveNotes();
+            renderNotesList();
+        });
+
+        summarizeButton.addEventListener('click', () => {
+            alert('Summarize function (mock) triggered!');
+            // In a real app, this would send editor.value to an AI for summarization
+        });
+
+        // Initial load
+        loadNotes();
+    </script>
+</body>
+</html>
