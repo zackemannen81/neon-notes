@@ -83,9 +83,10 @@ Auto-picked
   notes: Bevara schema; skriv migreringssteg
 
 - TASK: Import/Export Markdown
-  owner: OPEN
-  status: TODO
+  owner: Gemini CLI
+  status: REVIEW
   notes: Exportera note->.md; Importera .md->note
+Auto-picked
 
 - TASK: CI — workflow_dispatch + badge
   owner: OPEN

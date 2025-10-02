@@ -26,6 +26,10 @@
         <textarea id="editor" placeholder="Start writing your note..."></textarea>
         <div class="button-group">
             <button id="save-button">Save Note</button>
+            <button id="export-button">Export as Markdown</button>
+            <input type="file" id="import-file-input" accept=".md" style="display: none;">
+            <button id="import-button">Import Markdown</button>
+            <span id="save-indicator" style="margin-left: 10px; font-size: 0.9em; color: #555;"></span>
             <button id="summarize-button">Summarize (Mock)</button>
         </div>
         <div id="summary-output" style="margin-top: 10px; padding: 10px; border: 1px solid #eee; background-color: #f9f9f9;">
@@ -34,47 +38,147 @@
     </div>
 
     <script>
-        const editor = document.getElementById('editor');
-        const notesList = document.getElementById('notes-list');
-        const saveButton = document.getElementById('save-button');
         const summarizeButton = document.getElementById('summarize-button');
         const summaryOutput = document.getElementById('summary-output');
+        const saveIndicator = document.getElementById('save-indicator');
+        const errorMessage = document.getElementById('error-message');
+        const exportButton = document.getElementById('export-button');
 
         let currentNoteId = null;
         let notes = []; // In-memory storage for now
+        let autosaveTimeout;
+
+        function displayError(message) {
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+        }
+
+        function clearError() {
+            errorMessage.textContent = '';
+            errorMessage.style.display = 'none';
+        }
 
         // Mock function to load notes
         async function loadNotes() {
+            clearError();
             try {
                 const response = await fetch('data/notes.json');
                 if (response.ok) {
                     notes = await response.json();
                 } else {
                     notes = [];
+                    displayError('Could not load notes. Starting fresh.');
                 }
             } catch (error) {
                 console.error('Error loading notes:', error);
                 notes = [];
+                displayError('Error loading notes: ' + error.message);
             }
             renderNotesList();
         }
 
         // Mock function to save notes
         async function saveNotes() {
-            // In a real app, this would send data to a backend
-            // For now, we'll just log it and simulate saving
-            console.log('Saving notes:', notes);
-            // Simulate writing to data/notes.json (this won't actually write to disk from the browser)
-            // This part would be handled by a server-side component
-            alert('Note saved (mock)!');
+            clearError();
+            saveIndicator.textContent = 'Saving...';
+            console.log('Attempting to save notes:', notes);
+            try {
+                // Simulate sending data to a backend endpoint
+                const response = await fetch('/save-notes', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(notes),
+                });
+
+                if (response.ok) {
+                    console.log('Notes saved (mock) successfully!');
+                    saveIndicator.textContent = 'Saved';
+                    setTimeout(() => saveIndicator.textContent = '', 2000); // Clear after 2 seconds
+                } else {
+                    console.error('Failed to save notes (mock):', response.statusText);
+                    saveIndicator.textContent = 'Save Failed!';
+                    displayError('Failed to save note: ' + response.statusText);
+                }
+            } catch (error) {
+                console.error('Error during mock save:', error);
+                saveIndicator.textContent = 'Save Error!';
+                displayError('Error saving note: ' + error.message);
+            }
         }
 
         function renderNotesList() {
             notesList.innerHTML = '';
+            if (notes.length === 0) {
+                const emptyMessage = document.createElement('li');
+                emptyMessage.textContent = 'No notes yet. Start writing!';
+                emptyMessage.style.fontStyle = 'italic';
+                emptyMessage.style.color = '#888';
+                notesList.appendChild(emptyMessage);
+                return;
+            }
             notes.forEach(note => {
                 const li = document.createElement('li');
-                li.textContent = note.title || 'Untitled Note';
-                li.dataset.id = note.id;
+                li.style.display = 'flex';
+                li.style.alignItems = 'center';
+                li.style.padding = '5px 0';
+                li.setAttribute('tabindex', '0'); // Make list items focusable
+
+                const titleSpan = document.createElement('span');
+                titleSpan.textContent = note.title || 'Untitled Note';
+                titleSpan.style.cursor = 'pointer';
+                titleSpan.style.flexGrow = '1';
+                titleSpan.addEventListener('click', (event) => {
+                    event.stopPropagation(); // Prevent li click event
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.value = titleSpan.textContent;
+                    input.style.width = 'calc(100% - 30px)'; // Adjust for button
+                    input.style.boxSizing = 'border-box';
+
+                    const saveTitle = () => {
+                        note.title = input.value;
+                        saveNotes();
+                        renderNotesList();
+                    };
+
+                    input.addEventListener('blur', saveTitle);
+                    input.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter') {
+                            input.blur(); // Trigger blur to save
+                        }
+                    });
+
+                    li.replaceChild(input, titleSpan);
+                    input.focus();
+                });
+                li.appendChild(titleSpan);
+
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'X';
+                deleteButton.style.marginLeft = '10px';
+                deleteButton.style.backgroundColor = '#f44336';
+                deleteButton.style.color = 'white';
+                deleteButton.style.border = 'none';
+                deleteButton.style.borderRadius = '3px';
+                deleteButton.style.cursor = 'pointer';
+                deleteButton.style.padding = '2px 6px';
+                deleteButton.addEventListener('click', (event) => {
+                    event.stopPropagation(); // Prevent li click event
+                    if (confirm('Are you sure you want to delete this note?')) {
+                        notes = notes.filter(n => n.id !== note.id);
+                        saveNotes();
+                        renderNotesList();
+                        if (currentNoteId === note.id) {
+                            editor.value = '';
+                            currentNoteId = null;
+                        }
+                    }
+                });
+
+                li.appendChild(deleteButton);
+
                 li.addEventListener('click', () => {
                     currentNoteId = note.id;
                     editor.value = note.content;
@@ -84,22 +188,29 @@
         }
 
         saveButton.addEventListener('click', () => {
+            clearError();
             const content = editor.value;
             if (content.trim() === '') return;
 
             if (currentNoteId) {
                 // Update existing note
+                const now = new Date().toISOString();
                 const noteIndex = notes.findIndex(n => n.id === currentNoteId);
                 if (noteIndex > -1) {
                     notes[noteIndex].content = content;
                     notes[noteIndex].title = content.split('\n')[0].substring(0, 50); // Simple title from first line
+                    notes[noteIndex].updatedAt = now;
                 }
             } else {
                 // Create new note
+                const now = new Date().toISOString();
                 const newNote = {
-                    id: Date.now().toString(),
+                    id: Date.now().toString(), // Simple ID for now, ideally UUID
                     title: content.split('\n')[0].substring(0, 50), // Simple title from first line
-                    content: content
+                    content: content,
+                    createdAt: now,
+                    updatedAt: now,
+                    summary: { tldr: '', highlights: [] } // Placeholder for summary
                 };
                 notes.push(newNote);
                 currentNoteId = newNote.id;
@@ -108,14 +219,82 @@
             renderNotesList();
         });
 
+        editor.addEventListener('input', () => {
+            clearTimeout(autosaveTimeout);
+            autosaveTimeout = setTimeout(() => {
+                // Only autosave if there's a current note selected or content to create a new one
+                if (currentNoteId || editor.value.trim() !== '') {
+                    saveButton.click(); // Trigger the save logic
+                }
+            }, 3000); // Autosave every 3 seconds
+        });
+
         summarizeButton.addEventListener('click', () => {
+            clearError();
             const noteContent = editor.value;
-            if (noteContent.trim() === '') {
-                summaryOutput.textContent = 'Nothing to summarize.';
+            const summary = summarizeNote(noteContent);
+            if (summary.tldr === 'Nothing to summarize.') {
+                summaryOutput.textContent = summary.tldr;
+            } else {
+                summaryOutput.innerHTML = `<b>TL;DR:</b> ${summary.tldr}<br><b>Highlights:</b><ul>${summary.highlights.map(h => `<li>${h}</li>`).join('')}</ul>`;
+            }
+        });
+
+        exportButton.addEventListener('click', () => {
+            const content = editor.value;
+            if (content.trim() === '') {
+                displayError('Nothing to export.');
                 return;
             }
-            const mockSummary = `TL;DR: This is a mock summary of your note. Highlights: 1. Key point one. 2. Key point two. 3. Key point three.`;
-            summaryOutput.textContent = mockSummary;
+            const filename = (notes.find(n => n.id === currentNoteId)?.title || 'untitled').replace(/[^a-z0-9]/gi, '_').toLowerCase() + '.md';
+            const blob = new Blob([content], { type: 'text/markdown' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            clearError();
+        });
+
+        const importFileInput = document.getElementById('import-file-input');
+        const importButton = document.getElementById('import-button');
+
+        importButton.addEventListener('click', () => {
+            importFileInput.click(); // Trigger the hidden file input
+        });
+
+        importFileInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (!file) {
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const content = e.target.result;
+                const now = new Date().toISOString();
+                const newNote = {
+                    id: Date.now().toString(),
+                    title: file.name.replace('.md', '').substring(0, 50) || 'Imported Note',
+                    content: content,
+                    createdAt: now,
+                    updatedAt: now,
+                    summary: { tldr: '', highlights: [] }
+                };
+                notes.push(newNote);
+                currentNoteId = newNote.id;
+                editor.value = content;
+                saveNotes();
+                renderNotesList();
+                clearError();
+            };
+            reader.onerror = (e) => {
+                displayError('Error reading file: ' + e.target.error.message);
+            };
+            reader.readAsText(file);
         });
 
         // Initial load
