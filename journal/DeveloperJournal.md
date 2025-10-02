@@ -66,3 +66,12 @@
 - **Status:** DONE
 - **Notes:** Merged
 
+### Gemini CLI — Finished: Build minimal UI skeleton
+- **Time:** 2025-10-02 02:19:42 UTC
+- **Status:** REVIEW
+- **Notes:** PR #2
+
+### Gemini CLI — Update: Build minimal UI skeleton
+- **Time:** 2025-10-02 02:20:17 UTC
+- **Update:** PR #2 opened
+
