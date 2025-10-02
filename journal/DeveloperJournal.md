@@ -51,3 +51,18 @@
 - **Time:** 2025-10-02 01:59:48 UTC
 - **Notes:** Följer nya statusar
 
+### Gemini CLI — Finished: Build minimal UI skeleton
+- **Time:** 2025-10-02 02:00:20 UTC
+- **Status:** REVIEW
+- **Notes:** —
+
+### Gemini CLI — Finished: Build minimal UI skeleton
+- **Time:** 2025-10-02 02:17:44 UTC
+- **Status:** REVIEW
+- **Notes:** PR #2
+
+### Gemini CLI — Finished: Build minimal UI skeleton
+- **Time:** 2025-10-02 02:18:23 UTC
+- **Status:** DONE
+- **Notes:** Merged
+
